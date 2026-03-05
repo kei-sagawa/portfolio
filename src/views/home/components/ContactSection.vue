@@ -138,13 +138,40 @@ watch(
   },
 )
 
-function submitForm() {
-  console.log('送信内容:', form.value)
-  submitted.value = true
-  form.value = { name: '', email: '', message: '' }
-  setTimeout(() => {
-    submitted.value = false
-  }, 3000)
+async function submitForm() {
+  try {
+    const payload = {
+      name: form.value.name.trim(),
+      email: form.value.email.trim(),
+      message: form.value.message.trim(),
+    }
+
+    // 軽いバリデーション
+    if (!payload.name || !payload.email || !payload.message) return
+
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+
+    const data = await res.json().catch(() => ({}))
+
+    if (!res.ok) {
+      console.error('送信失敗:', data)
+      // ここでUIにエラー表示したければ stateを追加
+      return
+    }
+
+    submitted.value = true
+    form.value = { name: '', email: '', message: '' }
+
+    setTimeout(() => {
+      submitted.value = false
+    }, 3000)
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 defineExpose({ onMessageInput })
