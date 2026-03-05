@@ -156,30 +156,31 @@ type RecordItem = {
 
 const recordItems = ref<RecordItem[]>([
   {
-    id: 'usagi',
-    src: '/usagi.JPEG',
-    date: '2026.02',
-    title: '茶会「雪兎」',
-    desc: '冬の茶会でお出しした主菓子。縁高にひょっこり。',
-    place: '（場所を入れたいなら）',
-    note: '菓子は記憶。記録があると次の会が豊かになる。',
-    tags: ['茶会', '菓子'],
+    id: 'tsuzuri',
+    src: '/tsuzuri.png',
+    date: '2026.03',
+    title: '綴（TSUZURI）サイト制作',
+    desc: '自分の思索と制作を記録する拠点としてポートフォリオサイト「綴」を制作。',
+    note: 'Vue + Vite + Vercel で構築し、活動記録や作品を静かに残していく場所として整備した。',
+    tags: ['Web制作', 'Vue', 'ポートフォリオ'],
   },
   {
-    id: 'aoyagi',
-    src: '/tougetusai_aoyagi.JPEG',
-    date: '2026.01',
-    title: '花入れ「青柳」と取り合わせ',
-    desc: '竹一重切の花入れ。椿がよく映える。',
-    tags: ['茶道具', '取り合わせ'],
+    id: 'kiroku',
+    src: '/kiroku.png',
+    date: '2026.03',
+    title: '記録ギャラリーUIの設計',
+    desc: '活動記録を写真と共に残すためのカルーセル型ギャラリーUIを実装。',
+    note: 'クリックでモーダル表示、左右キーやスワイプで移動できるシンプルな閲覧体験を目指した。',
+    tags: ['UI', 'Vue', 'フロントエンド'],
   },
   {
-    id: 'manjigama',
-    src: '/manjigama.JPEG',
+    id: 'toiawase',
+    src: '/toiawase.png',
     date: '2025.12',
-    title: '万字釜の点検と手入れ',
-    desc: '炉にかけるとよく映える。肌の景色が良い。',
-    tags: ['茶道具', '手入れ'],
+    title: 'お問い合わせフォームの実装',
+    desc: 'サイトから直接連絡を受け取れるようメールフォームを実装。',
+    note: 'Vercel Serverless Functions とResend を使い、安全にメール送信できる構成にした。',
+    tags: ['Vercel', 'API', 'Resend'],
   },
 ])
 
@@ -353,22 +354,24 @@ RECORDS
 
 /* ===== Header ===== */
 .records-head {
-  position: relative;
-  display: flex;
-  justify-content: flex-end; /* ✅ controls を右へ */
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* 左余白 / タイトル / 右(controls) */
+  align-items: end;
   gap: 20px;
   margin-bottom: 34px;
-  min-height: 64px; /* ✅ タイトル/リード分の高さ確保（微調整OK） */
 }
 
-/* ✅ タイトルは中央固定（レイアウトに引っ張られない） */
 .records-titleblock {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  grid-column: 2; /* 真ん中 */
   text-align: center;
-  pointer-events: none; /* ✅ タイトル付近で右のselect操作を邪魔しない */
+}
+
+.records-controls {
+  grid-column: 3; /* 右端 */
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .records-titleblock h2 {
@@ -380,14 +383,6 @@ RECORDS
   font-size: 13px;
   letter-spacing: 0.16em;
   color: rgba(58, 42, 31, 0.72);
-}
-
-.records-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-left: auto; /* ✅ 念のため右端固定を補強 */
-  z-index: 1; /* ✅ titleblockより前に出す */
 }
 
 .records-filter {
@@ -741,21 +736,17 @@ RESPONSIVE
 
 @media (max-width: 768px) {
   .records-head {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
-    min-height: unset;
   }
 
   .records-titleblock {
-    position: static;
-    transform: none;
     text-align: left;
-    pointer-events: auto;
   }
 
   .records-controls {
-    margin-left: 0;
+    justify-self: auto;
   }
 
   .record-card {

@@ -4,35 +4,73 @@
       <h2>制作</h2>
 
       <div class="works-grid">
-        <a class="work-card" href="#" target="_blank" rel="noopener">
-          <div class="work-title">綴 / TSUZURI（拠点サイト）</div>
-          <div class="work-desc">思索と創作を静かに綴るための個人拠点。導線と余白の設計。</div>
-          <div class="work-meta">
-            <span class="tag">Vue</span>
-            <span class="tag">TypeScript</span>
+        <a
+          v-for="w in works"
+          :key="w.id"
+          class="work-card"
+          :class="{ 'is-wip': w.status === 'wip' }"
+          :href="w.status === 'live' ? w.href : undefined"
+          :aria-disabled="w.status === 'wip' ? 'true' : 'false'"
+          :tabindex="w.status === 'wip' ? -1 : 0"
+          target="_blank"
+          rel="noopener"
+          @click.prevent="w.status === 'wip' && null"
+        >
+          <div class="work-title">
+            {{ w.title }}
+            <span v-if="w.status === 'wip'" class="badge">準備中</span>
           </div>
-        </a>
 
-        <a class="work-card" href="#" target="_blank" rel="noopener">
-          <div class="work-title">Tea Utensil Manager</div>
-          <div class="work-desc">茶道具の登録・タグ・検索を行う管理アプリ。記録のための道具。</div>
+          <div class="work-desc">{{ w.desc }}</div>
+
           <div class="work-meta">
-            <span class="tag">Vue</span>
-            <span class="tag">Supabase</span>
+            <span v-for="t in w.tags" :key="t" class="tag">{{ t }}</span>
           </div>
-        </a>
 
-        <a class="work-card" href="#" target="_blank" rel="noopener">
-          <div class="work-title">Todo App</div>
-          <div class="work-desc">日々の積み重ねを小さく続けるためのシンプルなタスク管理。</div>
-          <div class="work-meta">
-            <span class="tag">Vue</span>
+          <div v-if="w.status === 'wip'" class="work-note">
+            公開できる形に整い次第、順次追加します。
           </div>
         </a>
       </div>
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+type WorkItem = {
+  id: string
+  title: string
+  desc: string
+  tags: string[]
+  status: 'live' | 'wip'
+  href?: string
+}
+
+const works: WorkItem[] = [
+  {
+    id: 'tsuzuri',
+    title: '綴 / TSUZURI（拠点サイト）',
+    desc: '思索と創作を静かに綴るための個人拠点。導線と余白の設計。',
+    tags: ['Vue', 'TypeScript'],
+    status: 'live',
+    href: 'https://tsuzuri-lab.vercel.app/',
+  },
+  {
+    id: 'tea-utensil',
+    title: 'Tea Utensil Manager',
+    desc: '茶道具の登録・タグ・検索を行う管理アプリ。記録のための道具。',
+    tags: ['Vue', 'Supabase'],
+    status: 'wip',
+  },
+  {
+    id: 'todo',
+    title: 'Todo App',
+    desc: '日々の積み重ねを小さく続けるためのシンプルなタスク管理。',
+    tags: ['Vue'],
+    status: 'wip',
+  },
+]
+</script>
 
 <style scoped>
 .works {
@@ -59,7 +97,9 @@
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    opacity 0.25s ease,
+    filter 0.25s ease;
 }
 .work-card:hover {
   transform: translateY(-3px);
@@ -72,6 +112,9 @@
   color: #2b2b2b;
   line-height: 1.6;
   font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .work-desc {
   margin-top: 10px;
@@ -89,7 +132,7 @@
   color: rgba(107, 79, 58, 0.88);
 }
 
-/* 共通タグ（まずはここに置く。後で共通CSSへ移してもOK） */
+/* 共通タグ */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -98,5 +141,35 @@
   background: rgba(255, 248, 240, 0.6);
   border-radius: 999px;
   line-height: 1;
+}
+
+/* ===== 準備中（WIP）表現 ===== */
+.work-card.is-wip {
+  opacity: 0.78;
+  filter: saturate(0.92);
+  cursor: default;
+}
+.work-card.is-wip:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: rgba(216, 207, 192, 0.65);
+}
+
+.badge {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  padding: 5px 10px;
+  border: 1px solid rgba(216, 207, 192, 0.75);
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  color: rgba(107, 79, 58, 0.85);
+}
+
+.work-note {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.9;
+  letter-spacing: 0.08em;
+  color: rgba(58, 42, 31, 0.68);
 }
 </style>
