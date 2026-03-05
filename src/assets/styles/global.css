@@ -4,6 +4,8 @@ body {
   font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
   color: #2b2b2b;
   background-color: #f5f1e8;
+  letter-spacing: 0.03em;
+  line-height: 1.9;
 }
 
 h1,
@@ -37,4 +39,10 @@ h6 {
   font-size: 18px;
   line-height: 2;
   margin-bottom: 40px;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
