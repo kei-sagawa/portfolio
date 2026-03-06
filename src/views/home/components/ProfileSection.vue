@@ -24,7 +24,7 @@
               <font-awesome-icon :icon="['fab', 'facebook']" size="2x" />
             </a>
             <a href="https://note.com/tsuzuri_official" target="_blank" rel="noopener">
-              <img src="/note-icon.svg" alt="Note" class="social-icon" />
+              <img src="/note.svg" alt="Note" class="social-icon" />
             </a>
           </div>
         </div>
@@ -66,11 +66,17 @@
 
 .social-links {
   margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .social-links a {
-  margin-right: 16px;
-  font-size: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #3a2a1f;
   transition:
     color 0.3s,
@@ -85,7 +91,8 @@
 .social-icon {
   width: 40px;
   height: 40px;
-  transition: transform 0.3s;
+  display: block;
+  object-fit: contain;
 }
 
 .social-icon:hover {
