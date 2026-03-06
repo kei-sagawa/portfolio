@@ -57,14 +57,14 @@ const works: WorkItem[] = [
   },
   {
     id: 'tea-utensil',
-    title: 'Tea Utensil Manager',
+    title: '茶道具管理アプリ',
     desc: '茶道具の登録・タグ・検索を行う管理アプリ。記録のための道具。',
     tags: ['Vue', 'Supabase'],
     status: 'wip',
   },
   {
     id: 'todo',
-    title: 'Todo App',
+    title: 'Todo アプリ',
     desc: '日々の積み重ねを小さく続けるためのシンプルなタスク管理。',
     tags: ['Vue'],
     status: 'wip',
@@ -171,5 +171,60 @@ const works: WorkItem[] = [
   line-height: 1.9;
   letter-spacing: 0.08em;
   color: rgba(58, 42, 31, 0.68);
+}
+@media (max-width: 768px) {
+  .works {
+    padding: 100px 20px;
+  }
+
+  .works h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+    letter-spacing: 0.12em;
+  }
+
+  .works-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .work-card {
+    padding: 22px 20px;
+  }
+
+  .work-title {
+    font-size: 14px;
+    line-height: 1.8;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .work-desc {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .work-meta {
+    margin-top: 12px;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .work-note {
+    margin-top: 12px;
+    font-size: 11px;
+    line-height: 1.8;
+  }
 }
 </style>

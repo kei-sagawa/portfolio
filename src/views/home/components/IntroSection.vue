@@ -74,17 +74,35 @@
 /* スマホ */
 @media (max-width: 768px) {
   .intro {
-    padding: 110px 20px;
+    padding: 100px 20px;
   }
 
   .intro-row {
     flex-direction: column;
-    align-items: center;
-    gap: 50px;
+    align-items: flex-start;
+    gap: 28px;
   }
 
-  .intro-body,
+  .intro-block {
+    writing-mode: horizontal-tb; /* ← これが必須 */
+    text-orientation: initial;
+    width: 100%;
+    line-height: 2.1;
+    letter-spacing: 0.08em;
+  }
+
+  .intro-main {
+    font-size: 24px;
+  }
+
+  .intro-body {
+    font-size: 15px;
+    margin-top: 0;
+    opacity: 0.88;
+  }
+
   .intro-tag {
+    font-size: 18px;
     margin-top: 0;
   }
 }

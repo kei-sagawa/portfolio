@@ -29,7 +29,7 @@
             aria-label="前へ"
             title="前へ"
           >
-            ←
+            ‹
           </button>
 
           <button
@@ -40,7 +40,7 @@
             aria-label="次へ"
             title="次へ"
           >
-            →
+            ›
           </button>
 
           <div class="carousel-track" :style="trackStyle">
@@ -484,8 +484,8 @@ CAROUSEL
 
 .record-date {
   font-size: 12px;
-  letter-spacing: 0.14em;
-  color: rgba(107, 79, 58, 0.82);
+  letter-spacing: 0.18em;
+  color: rgba(107, 79, 58, 0.9);
 }
 
 .record-title {
@@ -548,32 +548,37 @@ CAROUSEL
 /* 矢印（競合しにくいクラス名推奨） */
 .carousel-nav.overlay {
   position: absolute;
-  top: 80px; /* 画像高さ160pxのだいたい中央 */
-  translate: 0 -50%;
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(216, 207, 192, 0.9);
-  background: rgba(255, 255, 255, 0.72);
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+  border: 1px solid rgba(216, 207, 192, 0.6);
+
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(6px);
+
+  color: rgba(58, 42, 31, 0.8);
+  font-size: 14px;
+
   cursor: pointer;
-  font-size: 18px;
-  color: rgba(58, 42, 31, 0.85);
   z-index: 5;
 
-  transition:
-    transform 0.15s ease,
-    opacity 0.2s ease,
-    background 0.2s ease;
+  transition: all 0.18s ease;
 }
 
 .carousel-nav.overlay:hover {
-  background: rgba(255, 248, 240, 0.85);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.65);
+  transform: translateY(-50%) scale(1.05);
 }
 
 .carousel-nav.overlay:disabled {
-  opacity: 0.35;
+  opacity: 0.28;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 /* ✅ ここは left/right 競合を避けたいなら overlay-left / overlay-right 推奨 */
@@ -735,22 +740,50 @@ RESPONSIVE
 }
 
 @media (max-width: 768px) {
+  .records {
+    padding: 100px 20px;
+  }
+
   .records-head {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* ←中央 */
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
   }
 
   .records-titleblock {
-    text-align: left;
+    position: static;
+    transform: none;
+    text-align: center; /* ←中央 */
+    pointer-events: auto;
   }
 
   .records-controls {
-    justify-self: auto;
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .records-carousel {
+    width: 100%;
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  /* ✅ ここが重要：スマホは gap を消す */
+  .carousel-track {
+    gap: 0;
+    width: 100%;
   }
 
   .record-card {
     flex: 0 0 100%;
+    width: 100%;
+    padding: 16px;
   }
 
   .record-card.is-edge {
@@ -758,11 +791,49 @@ RESPONSIVE
     opacity: 1;
   }
 
+  .record-img {
+    height: 180px;
+  }
+
+  .record-title {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .record-desc {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .record-tags {
+    gap: 6px;
+  }
+
+  /* ✅ 矢印を自然にする */
   .carousel-nav.overlay {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-    top: 78px;
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+    top: 90px;
+    border-radius: 999px;
+    border: 1px solid rgba(216, 207, 192, 0.72);
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  }
+
+  .carousel-nav.overlay.overlay-left {
+    left: 10px;
+  }
+
+  .carousel-nav.overlay.overlay-right {
+    right: 10px;
+  }
+
+  .carousel-status {
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
   }
 
   .modal-nav {
