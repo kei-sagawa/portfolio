@@ -64,6 +64,14 @@ const works: WorkItem[] = [
     href: 'https://todo-portfolio-seven.vercel.app/todo',
   },
   {
+    id: 'tsuzuri-ha',
+    title: '綴葉 | 古書販売・在庫管理アプリ',
+    desc: '古書の登録・販売・在庫管理を行うアプリ。',
+    tags: ['Vue', 'TypeScript', 'Vercel', 'Resend', 'Supabase'],
+    status: 'live',
+    href: 'https://kosho-manager.vercel.app',
+  },
+  {
     id: 'tea-utensil',
     title: '茶道具管理アプリ',
     desc: '茶道具の登録・タグ・検索を行う管理アプリ。記録のための道具。',
