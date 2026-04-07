@@ -48,10 +48,7 @@
 .profile-img img {
   width: 250px;
   height: 250px;
-  object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  border: 4px solid #fff;
 }
 
 .profile-text {
