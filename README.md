@@ -1,48 +1,57 @@
-# .
+# Portfolio
 
-This template should help get you started developing with Vue 3 in Vite.
+## ■ 概要
+Vue3 / TypeScript / Supabaseを用いたWebアプリ開発を行っています。  
+シンプルで使いやすく、保守・改善しやすい構成を意識した実装を心がけています。
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## ■ 制作物
 
-## Recommended Browser Setup
+### ■ 古書管理アプリ
+在庫管理・販売管理を目的としたWebアプリです。  
+個人での物販運用を想定し、シンプルに扱える構成で設計しています。
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- 技術：Vue3 / TypeScript / Supabase
+- 機能：CRUD（登録・編集・削除）、認証、データ管理
+- 特徴：シンプルなUI設計、実用性重視
 
-## Type Support for `.vue` Imports in TS
+---
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### ■ 茶道具管理アプリ（開発中）
+茶道具の記録・管理を目的としたWebアプリです。  
+現在は基本機能（登録・一覧・編集）の実装を進めています。
 
-## Customize configuration
+- 技術：Vue3 / TypeScript / Supabase
+- 機能：登録、一覧、検索（予定）
+- 特徴：実運用を想定した設計
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+---
 
-## Project Setup
+### ■ ポートフォリオサイト（随時更新中）
+制作物をまとめるための個人サイトです。  
+デザインおよび構成を調整しながら開発を進めています。
 
-```sh
-npm install
-```
+- 技術：Vue3 / TypeScript / Vite
+- 特徴：ミニマルで落ち着いたデザイン
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
-npm run dev
-```
+## ■ 技術スタック
+- Vue3（Composition API）
+- TypeScript
+- Supabase
+- HTML / CSS
+- Vite
 
-### Type-Check, Compile and Minify for Production
+---
 
-```sh
-npm run build
-```
+## ■ 開発において意識していること
+- シンプルで分かりやすい構造設計
+- 保守・改善しやすいコード
+- 実用性を重視したUI設計
 
-### Lint with [ESLint](https://eslint.org/)
+---
 
-```sh
-npm run lint
-```
+## ■ 補足
+現在も継続して個人開発を行っており、機能改善・追加を進めています。
