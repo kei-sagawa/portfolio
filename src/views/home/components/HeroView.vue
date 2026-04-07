@@ -10,8 +10,6 @@
     </h1>
 
     <p class="concept-vertical fade2">思索と創作の記録</p>
-
-    <p class="concept-sub fade3">Keita Sagawa</p>
   </div>
 </template>
 

@@ -14,7 +14,7 @@
           :tabindex="w.status === 'wip' ? -1 : 0"
           target="_blank"
           rel="noopener"
-          @click.prevent="w.status === 'wip' && null"
+          @click="w.status === 'wip' && $event.preventDefault()"
         >
           <div class="work-title">
             {{ w.title }}
