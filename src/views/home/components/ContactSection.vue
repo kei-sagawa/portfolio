@@ -7,7 +7,7 @@
       <form class="contact-form" @submit.prevent="submitForm">
         <div class="form-group">
           <label for="name">お名前</label>
-          <input type="text" id="name" v-model="form.name" placeholder="例: 佐川 渓太" required />
+          <input type="text" id="name" v-model="form.name" placeholder="例: 山田 太郎" required />
         </div>
 
         <div class="form-group">

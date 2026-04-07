@@ -61,7 +61,7 @@ const works: WorkItem[] = [
     desc: '日々の積み重ねを小さく続けるためのシンプルなタスク管理。',
     tags: ['Vue', 'TypeScript', 'Vercel'],
     status: 'live',
-    href: 'https://todo-portfolio-seven.vercel.app/todo',
+    href: 'https://todo-portfolio-seven.vercel.app/',
   },
   {
     id: 'tsuzuri-ha',
@@ -69,7 +69,7 @@ const works: WorkItem[] = [
     desc: '古書の登録・販売・在庫管理を行うアプリ。',
     tags: ['Vue', 'TypeScript', 'Vercel', 'Resend', 'Supabase'],
     status: 'live',
-    href: 'https://kosho-manager.vercel.app',
+    href: 'https://tsuzuriha.vercel.app/',
   },
   {
     id: 'tea-utensil',
