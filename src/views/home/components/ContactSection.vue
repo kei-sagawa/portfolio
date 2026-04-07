@@ -33,10 +33,15 @@
           ></textarea>
         </div>
 
-        <button type="submit" class="submit-btn">送信</button>
+        <button type="submit" class="submit-btn" :disabled="sending">
+          {{ sending ? '送信中…' : '送信' }}
+        </button>
       </form>
 
       <p v-if="submitted" class="submit-message">送信が完了しました。ありがとうございます！</p>
+      <p v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </p>
     </div>
   </section>
 </template>
@@ -57,6 +62,8 @@ const form = ref({
 })
 
 const submitted = ref(false)
+const sending = ref(false)
+const errorMessage = ref('')
 
 /** どのテンプレを最後に自動適用したか */
 const lastAppliedKey = ref<Exclude<ConsultKey, null> | null>(null)
@@ -139,6 +146,10 @@ watch(
 )
 
 async function submitForm() {
+  submitted.value = false
+  errorMessage.value = ''
+  sending.value = true
+
   try {
     const payload = {
       name: form.value.name.trim(),
@@ -146,8 +157,10 @@ async function submitForm() {
       message: form.value.message.trim(),
     }
 
-    // 軽いバリデーション
-    if (!payload.name || !payload.email || !payload.message) return
+    if (!payload.name || !payload.email || !payload.message) {
+      errorMessage.value = '入力内容を確認してください。'
+      return
+    }
 
     const res = await fetch('/api/contact', {
       method: 'POST',
@@ -159,7 +172,7 @@ async function submitForm() {
 
     if (!res.ok) {
       console.error('送信失敗:', data)
-      // ここでUIにエラー表示したければ stateを追加
+      errorMessage.value = '送信に失敗しました。時間を置いて再度お試しください。'
       return
     }
 
@@ -168,9 +181,12 @@ async function submitForm() {
 
     setTimeout(() => {
       submitted.value = false
-    }, 3000)
+    }, 5000)
   } catch (e) {
     console.error(e)
+    errorMessage.value = '通信エラーが発生しました。'
+  } finally {
+    sending.value = false
   }
 }
 
@@ -248,6 +264,17 @@ defineExpose({ onMessageInput })
 .submit-message {
   margin-top: 16px;
   color: #6b4f3a;
+  font-weight: 600;
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.error-message {
+  margin-top: 16px;
+  color: #a14b4b;
   font-weight: 600;
 }
 </style>
