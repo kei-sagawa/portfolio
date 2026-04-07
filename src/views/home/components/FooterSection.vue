@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <p>綴 TSUZURI<br />© 2026 Keita Sagawa</p>
+    <p>綴 TSUZURI<br />© 2026 綴 TSUZURI</p>
   </footer>
 </template>
 

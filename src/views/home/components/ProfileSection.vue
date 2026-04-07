@@ -5,7 +5,7 @@
 
       <div class="profile-container">
         <div class="profile-img">
-          <img src="/profile.JPG" alt="Keita Sagawa" loading="lazy" />
+          <img src="/profile_icon.png" alt="tuzuri" loading="lazy" />
         </div>
 
         <div class="profile-text">
