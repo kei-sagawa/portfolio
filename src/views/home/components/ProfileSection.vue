@@ -17,11 +17,8 @@
           </p>
 
           <div class="social-links">
-            <a href="https://www.instagram.com/keita.sagawa" target="_blank" rel="noopener">
-              <font-awesome-icon :icon="['fab', 'instagram']" size="2x" />
-            </a>
-            <a href="https://www.facebook.com/keita.sagawa.wa" target="_blank" rel="noopener">
-              <font-awesome-icon :icon="['fab', 'facebook']" size="2x" />
+            <a href="https://x.com/tsuzuri_lab" target="_blank" rel="noopener">
+              <font-awesome-icon :icon="['fab', 'x-twitter']" size="2x" />
             </a>
             <a href="https://note.com/tsuzuri_official" target="_blank" rel="noopener">
               <img src="/note.svg" alt="Note" class="social-icon" />
