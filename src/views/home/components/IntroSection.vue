@@ -2,19 +2,19 @@
   <section class="intro" id="intro">
     <div class="section-inner">
       <div class="intro-row">
-        <p class="intro-block intro-main">思索と創作を綴る場所。</p>
-
-        <p class="intro-block intro-body">
-          プログラミングや茶道<br />
-          日々の活動の中で<br />
-          生まれた考えや作品を<br />
-          ここに記録しています。
-        </p>
-
         <p class="intro-block intro-tag">
-          小さくても<br />
+          小さくても、<br />
           豊かな人生を。
         </p>
+
+        <p class="intro-block intro-body">
+          プログラミング、茶道、<br />
+          制作と日々の記録。<br />
+          その中で生まれた思索や作品を、<br />
+          ここに静かに綴っています。
+        </p>
+
+        <p class="intro-block intro-main">思索と創作を綴る場所。</p>
       </div>
     </div>
   </section>
@@ -24,86 +24,93 @@
 
 <style scoped>
 .intro {
-  padding: 140px 40px;
+  padding: 160px 40px;
   display: flex;
   justify-content: center;
 }
 
-/* 横並び構図 */
+.section-inner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .intro-row {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap: 80px;
+  align-items: center;
+  gap: 64px;
+  min-height: 420px;
 }
 
-/* 縦書き */
 .intro-block {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-
-  line-height: 2.3;
-  letter-spacing: 0.14em;
-
   color: #2b2b2b;
+  margin: 0;
 }
 
-/* 左：宣言（主役） */
 .intro-main {
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 600;
+  line-height: 2.05;
   letter-spacing: 0.16em;
+  color: #1f1f1f;
 }
 
-/* 中央：説明（主役を邪魔しない） */
 .intro-body {
-  font-size: 20px;
-  margin-top: 40px;
-  opacity: 0.78; /* ←ここが重要 */
+  font-size: 18px;
+  line-height: 2.08;
+  letter-spacing: 0.12em;
+  color: rgba(43, 43, 43, 0.76);
 }
 
-/* 右：余韻 */
 .intro-tag {
-  font-size: 22px;
+  font-size: 20px;
+  line-height: 2.1;
+  letter-spacing: 0.14em;
   color: #6b4f3a;
-
-  margin-top: -10px; /* ←少し上げる */
-  opacity: 0.92;
+  opacity: 0.84;
 }
 
-/* スマホ */
 @media (max-width: 768px) {
   .intro {
-    padding: 100px 20px;
+    padding: 96px 20px;
   }
 
   .intro-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 28px;
+    gap: 24px;
+    min-height: auto;
   }
 
   .intro-block {
-    writing-mode: horizontal-tb; /* ← これが必須 */
+    writing-mode: horizontal-tb;
     text-orientation: initial;
     width: 100%;
-    line-height: 2.1;
-    letter-spacing: 0.08em;
   }
 
   .intro-main {
+    order: 1;
     font-size: 24px;
+    line-height: 1.9;
+    letter-spacing: 0.08em;
   }
 
   .intro-body {
+    order: 2;
     font-size: 15px;
-    margin-top: 0;
-    opacity: 0.88;
+    line-height: 2;
+    letter-spacing: 0.04em;
+    color: rgba(43, 43, 43, 0.82);
   }
 
   .intro-tag {
-    font-size: 18px;
-    margin-top: 0;
+    order: 3;
+    font-size: 17px;
+    line-height: 1.9;
+    letter-spacing: 0.06em;
   }
 }
 </style>
