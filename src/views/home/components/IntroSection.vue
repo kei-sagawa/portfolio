@@ -24,7 +24,7 @@
 
 <style scoped>
 .intro {
-  padding: 160px 40px;
+  padding: 160px 40px 40px;
   display: flex;
   justify-content: center;
 }

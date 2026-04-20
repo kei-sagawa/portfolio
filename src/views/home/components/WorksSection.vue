@@ -11,43 +11,14 @@
 
       <div class="works-list">
         <a
-          class="work-item work-item-feature"
-          :href="featuredWork.href"
-          target="_blank"
-          rel="noopener"
-        >
-          <div class="work-index" aria-hidden="true">一</div>
-
-          <div class="work-body">
-            <div class="work-topline">
-              <span class="work-kind">{{ featuredWork.kind }}</span>
-            </div>
-
-            <h3 class="work-title work-title-feature">
-              <span class="work-title-name">{{ featuredWork.name }}</span>
-              <span class="work-title-sub">{{ featuredWork.titleSuffix }}</span>
-            </h3>
-
-            <p class="work-desc work-desc-feature">
-              {{ featuredWork.descLine1 }}<br />
-              {{ featuredWork.descLine2 }}
-            </p>
-
-            <p class="work-stack">{{ featuredWork.stackText }}</p>
-
-            <div class="work-link">拠点を見る</div>
-          </div>
-
-          <div class="work-feature-media" aria-hidden="true">
-            <img class="work-feature-image" src="/tsuzuri.png" alt="" />
-          </div>
-        </a>
-
-        <a
-          v-for="work in secondaryWorks"
+          v-for="work in works"
           :key="work.id"
           class="work-item"
-          :class="{ 'is-wip': work.status === 'wip' }"
+          :class="{
+            'is-featured': work.featured,
+            'is-wip': work.status === 'wip',
+            'has-thumbnail': !!work.thumbnailSrc,
+          }"
           :href="work.status === 'live' ? work.href : undefined"
           :aria-disabled="work.status === 'wip' ? 'true' : 'false'"
           :tabindex="work.status === 'wip' ? -1 : 0"
@@ -63,22 +34,51 @@
               <span v-if="work.status === 'wip'" class="work-badge">準備中</span>
             </div>
 
-            <h3 class="work-title">
-              <span class="work-title-name">{{ work.name }}</span>
-              <span class="work-title-sub">{{ work.titleSuffix }}</span>
+            <h3 class="work-title" :class="{ 'is-featured': work.featured }">
+              <span class="work-title-name" :class="{ 'is-featured': work.featured }">
+                {{ work.name }}
+              </span>
+              <span class="work-title-sub" :class="{ 'is-featured': work.featured }">
+                {{ work.titleSuffix }}
+              </span>
             </h3>
 
-            <p class="work-desc">
-              {{ work.desc }}
+            <p class="work-desc" :class="{ 'is-featured': work.featured }">
+              <template v-if="Array.isArray(work.descLines)">
+                <template v-for="(line, idx) in work.descLines" :key="idx">
+                  {{ line }}<br v-if="idx < work.descLines.length - 1" />
+                </template>
+              </template>
+              <template v-else>
+                {{ work.desc }}
+              </template>
             </p>
 
             <p class="work-stack">{{ work.stackText }}</p>
 
-            <p v-if="work.status === 'wip'" class="work-note">
-              公開できる形に整い次第、順次追加します。
+            <p v-if="work.status === 'wip' && work.note" class="work-note">
+              {{ work.note }}
             </p>
 
-            <div v-else class="work-link work-link-sub">作品を見る</div>
+            <div v-else class="work-link">
+              {{ work.linkLabel }}
+            </div>
+
+            <div
+              v-if="work.thumbnailSrc && !work.featured"
+              class="work-thumbnail work-thumbnail-inline"
+              aria-hidden="true"
+            >
+              <img class="work-thumbnail-image" :src="work.thumbnailSrc" alt="" />
+            </div>
+          </div>
+
+          <div
+            v-if="work.thumbnailSrc && work.featured"
+            class="work-thumbnail work-thumbnail-featured"
+            aria-hidden="true"
+          >
+            <img class="work-thumbnail-image" :src="work.thumbnailSrc" alt="" />
           </div>
         </a>
       </div>
@@ -87,39 +87,41 @@
 </template>
 
 <script setup lang="ts">
-type FeaturedWork = {
-  name: string
-  titleSuffix: string
-  kind: string
-  descLine1: string
-  descLine2: string
-  stackText: string
-  href: string
-}
-
 type WorkItem = {
   id: string
   index: string
+  featured?: boolean
   name: string
   titleSuffix: string
   kind: string
-  desc: string
+  desc?: string
+  descLines?: string[]
   stackText: string
   status: 'live' | 'wip'
   href?: string
+  linkLabel: string
+  note?: string
+  thumbnailSrc?: string
 }
 
-const featuredWork: FeaturedWork = {
-  name: '綴',
-  titleSuffix: '/ TSUZURI',
-  kind: '拠点サイト',
-  descLine1: '思索と創作の記録を残すための個人拠点。',
-  descLine2: '余白と静けさを軸に、世界観そのものを設計しています。',
-  stackText: 'Vue / TypeScript / Vercel / Resend',
-  href: 'https://tsuzuri-lab.vercel.app/',
-}
-
-const secondaryWorks: WorkItem[] = [
+const works: WorkItem[] = [
+  {
+    id: 'tsuzuri',
+    index: '一',
+    featured: true,
+    name: '綴',
+    titleSuffix: '/ TSUZURI',
+    kind: '拠点サイト',
+    descLines: [
+      '思索と創作の記録を残すための個人拠点。',
+      '余白と静けさを軸に、世界観そのものを設計しています。',
+    ],
+    stackText: 'Vue / TypeScript / Vercel / Resend',
+    status: 'live',
+    href: 'https://tsuzuri-lab.vercel.app/',
+    linkLabel: '拠点を見る',
+    thumbnailSrc: '/tsuzuri.png',
+  },
   {
     id: 'tsuzuri-ha',
     index: '二',
@@ -130,6 +132,8 @@ const secondaryWorks: WorkItem[] = [
     stackText: 'Vue / TypeScript / Vercel / Resend / Supabase',
     status: 'live',
     href: 'https://tsuzuriha.vercel.app/',
+    linkLabel: '作品を見る',
+    thumbnailSrc: '/tsuzuriha.png',
   },
   {
     id: 'chachou',
@@ -140,6 +144,9 @@ const secondaryWorks: WorkItem[] = [
     desc: '茶道具の登録・タグ・検索を行う管理アプリ。記録と実践のあいだをつなぐための道具です。',
     stackText: 'Vue / TypeScript / Vercel / Resend / Supabase',
     status: 'wip',
+    linkLabel: '',
+    note: '公開できる形に整い次第、順次追加します。',
+    thumbnailSrc: '/chachou.png',
   },
 ]
 </script>
@@ -206,10 +213,10 @@ const secondaryWorks: WorkItem[] = [
 }
 
 .work-item:hover {
-  opacity: 0.8;
+  opacity: 0.82;
 }
 
-.work-item-feature {
+.work-item.is-featured.has-thumbnail {
   grid-template-columns: 76px minmax(0, 1.08fr) minmax(320px, 0.92fr);
   align-items: center;
   column-gap: 28px;
@@ -218,7 +225,7 @@ const secondaryWorks: WorkItem[] = [
   border-top: none;
 }
 
-.work-item-feature::before {
+.work-item.is-featured::before {
   display: none;
 }
 
@@ -233,27 +240,6 @@ const secondaryWorks: WorkItem[] = [
 .work-body {
   max-width: 780px;
   min-width: 0;
-}
-
-.work-item-feature .work-body {
-  max-width: 100%;
-}
-
-.work-feature-media {
-  justify-self: start;
-  align-self: center;
-  width: 100%;
-  max-width: 420px;
-  margin-top: 28px;
-}
-
-.work-feature-image {
-  display: block;
-  width: 100%;
-  aspect-ratio: 5 / 4;
-  object-fit: cover;
-  object-position: center top;
-  opacity: 0.94;
 }
 
 .work-topline {
@@ -288,7 +274,7 @@ const secondaryWorks: WorkItem[] = [
   line-height: 1.6;
 }
 
-.work-title-feature {
+.work-title.is-featured {
   margin-top: 26px;
 }
 
@@ -299,7 +285,7 @@ const secondaryWorks: WorkItem[] = [
   color: #1f1f1f;
 }
 
-.work-title-feature .work-title-name {
+.work-title-name.is-featured {
   font-size: 58px;
   letter-spacing: 0.12em;
 }
@@ -312,7 +298,7 @@ const secondaryWorks: WorkItem[] = [
   color: rgba(43, 43, 43, 0.9);
 }
 
-.work-title-feature .work-title-sub {
+.work-title-sub.is-featured {
   font-size: 22px;
   color: rgba(43, 43, 43, 0.86);
 }
@@ -326,7 +312,7 @@ const secondaryWorks: WorkItem[] = [
   color: rgba(43, 43, 43, 0.78);
 }
 
-.work-desc-feature {
+.work-desc.is-featured {
   max-width: 600px;
   margin-top: 30px;
   font-size: 17px;
@@ -349,16 +335,36 @@ const secondaryWorks: WorkItem[] = [
   color: #6b4f3a;
 }
 
-.work-link-sub {
-  color: rgba(107, 79, 58, 0.66);
-}
-
 .work-note {
   margin: 18px 0 0;
   font-size: 12px;
   line-height: 1.9;
   letter-spacing: 0.08em;
   color: rgba(58, 42, 31, 0.58);
+}
+
+.work-thumbnail {
+  width: 100%;
+}
+
+.work-thumbnail-featured {
+  justify-self: start;
+  align-self: center;
+  max-width: 420px;
+  margin-top: 28px;
+}
+
+.work-thumbnail-inline {
+  margin-top: 26px;
+  max-width: 420px;
+}
+
+.work-thumbnail-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.94;
 }
 
 .work-item.is-wip {
@@ -371,7 +377,8 @@ const secondaryWorks: WorkItem[] = [
 }
 
 @media (max-width: 980px) {
-  .work-item {
+  .work-item,
+  .work-item.is-featured.has-thumbnail {
     grid-template-columns: 52px minmax(0, 1fr);
     column-gap: 20px;
   }
@@ -381,11 +388,7 @@ const secondaryWorks: WorkItem[] = [
     width: 56px;
   }
 
-  .work-item-feature {
-    grid-template-columns: 52px minmax(0, 1fr);
-  }
-
-  .work-feature-media {
+  .work-thumbnail {
     display: none;
   }
 
@@ -393,7 +396,7 @@ const secondaryWorks: WorkItem[] = [
     font-size: 36px;
   }
 
-  .work-title-feature .work-title-name {
+  .work-title-name.is-featured {
     font-size: 48px;
   }
 
@@ -422,7 +425,8 @@ const secondaryWorks: WorkItem[] = [
     line-height: 2;
   }
 
-  .work-item {
+  .work-item,
+  .work-item.is-featured.has-thumbnail {
     grid-template-columns: 1fr;
     row-gap: 10px;
     padding: 30px 0 32px;
@@ -433,7 +437,7 @@ const secondaryWorks: WorkItem[] = [
     width: 44px;
   }
 
-  .work-item-feature {
+  .work-item.is-featured {
     padding-top: 8px;
     padding-bottom: 42px;
   }
@@ -452,7 +456,7 @@ const secondaryWorks: WorkItem[] = [
     line-height: 1.55;
   }
 
-  .work-title-feature .work-title-name {
+  .work-title-name.is-featured {
     font-size: 38px;
   }
 
@@ -464,7 +468,7 @@ const secondaryWorks: WorkItem[] = [
     line-height: 1.7;
   }
 
-  .work-title-feature .work-title-sub {
+  .work-title-sub.is-featured {
     font-size: 17px;
   }
 
@@ -474,7 +478,7 @@ const secondaryWorks: WorkItem[] = [
     line-height: 2;
   }
 
-  .work-desc-feature {
+  .work-desc.is-featured {
     margin-top: 22px;
     font-size: 15px;
     line-height: 2.08;
