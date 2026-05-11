@@ -5,11 +5,11 @@ import './assets/styles/global.css'
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faXTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faXTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 // アイコンをライブラリに追加
-library.add(faXTwitter, faBars, faXmark)
+library.add(faXTwitter, faInstagram, faBars, faXmark)
 
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
