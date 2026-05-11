@@ -1,45 +1,33 @@
 <template>
   <nav class="navbar">
     <div class="nav-container">
-      <div class="nav-logo">綴 <span class="nav-roman">TSUZURI</span></div>
+      <RouterLink class="nav-logo" to="/" @click="closeMenu">
+        綴 <span class="nav-roman">TSUZURI</span>
+      </RouterLink>
 
       <button class="nav-toggle" type="button" @click="isOpen = !isOpen">
         <font-awesome-icon :icon="isOpen ? ['fas', 'xmark'] : ['fas', 'bars']" />
       </button>
 
       <div class="nav-links" :class="{ open: isOpen }">
-        <a href="#works" @click="closeMenu">制作</a>
-        <a href="#records" @click="closeMenu">記録</a>
-        <a href="#profile" @click="closeMenu">私について</a>
-        <a href="#consult" @click="closeMenu">ご相談</a>
-        <a href="#contact" @click="closeMenu">お問い合わせ</a>
+        <RouterLink to="/about" @click="closeMenu">綴について</RouterLink>
+        <RouterLink to="/works" @click="closeMenu">制作</RouterLink>
+        <RouterLink to="/web-design" @click="closeMenu">Web制作</RouterLink>
+        <RouterLink to="/thoughts" @click="closeMenu">記録</RouterLink>
       </div>
     </div>
   </nav>
 </template>
+
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const isOpen = ref(false)
 
 function closeMenu() {
   isOpen.value = false
 }
-
-const isScrolled = ref(false)
-
-function onNavScroll() {
-  isScrolled.value = window.scrollY > 24
-}
-
-onMounted(() => {
-  onNavScroll()
-  window.addEventListener('scroll', onNavScroll, { passive: true })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', onNavScroll)
-})
 </script>
 
 <style scoped>
@@ -74,6 +62,7 @@ onUnmounted(() => {
   display: flex;
   align-items: baseline;
   gap: 10px;
+  text-decoration: none;
 }
 
 .nav-roman {
@@ -96,6 +85,10 @@ onUnmounted(() => {
   text-decoration: none;
 }
 
+.nav-links a.router-link-active {
+  color: #6b4f3a;
+}
+
 .nav-toggle {
   display: none;
   border: none;
@@ -106,7 +99,6 @@ onUnmounted(() => {
   cursor: pointer;
 }
 
-/* スマホ */
 @media (max-width: 768px) {
   .navbar {
     padding: 12px 18px;
