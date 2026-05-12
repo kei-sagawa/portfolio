@@ -92,7 +92,7 @@ const recordLinks: RecordLink[] = [
     id: 'instagram',
     name: 'Instagram',
     label: 'Instagramを開く',
-    href: 'https://www.instagram.com/tsuzuri_official',
+    href: 'https://www.instagram.com/tsuzuri_lab',
     desc: '茶道の稽古や茶会、茶道具など、目で見る記録を残しています。',
     iconType: 'fontawesome',
     icon: ['fab', 'instagram'],

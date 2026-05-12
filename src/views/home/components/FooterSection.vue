@@ -11,16 +11,20 @@
       </div>
 
       <nav class="footer-nav" aria-label="Footer navigation">
-        <RouterLink to="/about">綴について</RouterLink>
+        <RouterLink to="/">ホームへ</RouterLink>
         <RouterLink to="/works">制作</RouterLink>
-        <RouterLink to="/thoughts">記録</RouterLink>
+        <RouterLink to="/web-design">Web制作</RouterLink>
+        <RouterLink to="/about">わたしについて</RouterLink>
+        <RouterLink to="/contact">ご相談</RouterLink>
       </nav>
 
-      <div class="footer-links">
+      <div class="footer-links" aria-label="External links">
         <a href="https://x.com/tsuzuri_lab" target="_blank" rel="noopener">X</a>
         <a href="https://note.com/tsuzuri_official" target="_blank" rel="noopener">note</a>
+        <a href="https://www.instagram.com/tsuzuri_lab" target="_blank" rel="noopener">
+          Instagram
+        </a>
         <a href="https://chachou.jp" target="_blank" rel="noopener">茶帳</a>
-        <a href="mailto:your-email@example.com">Contact</a>
       </div>
     </div>
 

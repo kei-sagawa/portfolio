@@ -7,6 +7,7 @@ import WorksView from '../views/works/WorksView.vue'
 import ThoughtsView from '../views/thoughts/ThoughtsView.vue'
 import AboutView from '../views/about/AboutView.vue'
 import WebDesignView from '../views/web-design/WebDesignView.vue'
+import ContactView from '@/views/contact/ContactView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: AboutView,
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactView,
     },
   ],
   scrollBehavior() {

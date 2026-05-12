@@ -5,7 +5,7 @@
         <p class="number">04</p>
         <span class="line" aria-hidden="true"></span>
 
-        <h2>綴について</h2>
+        <h2>わたしについて</h2>
 
         <p class="profile-name">綴 | TSUZURI</p>
 
@@ -22,7 +22,7 @@
         </p>
 
         <div class="profile-actions">
-          <RouterLink class="more-link" to="/about">綴について読む</RouterLink>
+          <RouterLink class="more-link" to="/about">わたしについて読む</RouterLink>
         </div>
       </div>
 
@@ -49,7 +49,7 @@
           </a>
 
           <a
-            href="https://www.instagram.com/tsuzuri_official"
+            href="https://www.instagram.com/tsuzuri_lab"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
