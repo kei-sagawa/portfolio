@@ -14,7 +14,7 @@
 
     <ConsultSection @select="onSelectConsult" />
 
-    <!-- <ContactSection :prefill-key="consultKey" /> -->
+    <ContactSection :prefill-key="consultKey" />
 
     <FooterSection />
   </div>

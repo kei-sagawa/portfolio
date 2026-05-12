@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 import NavbarSection from '../home/components/NavbarSection.vue'
 import FooterSection from '../home/components/FooterSection.vue'
 import { works } from '@/data/works'
@@ -116,10 +117,20 @@ const enhancedWorks = computed(() =>
 const featuredWorks = computed(() => enhancedWorks.value.slice(0, 3))
 const hiddenWorks = computed(() => enhancedWorks.value.slice(3))
 
-function setWorkRef(el: Element | null, id: string) {
-  if (!el) return
-  workRefs.set(id, el)
-  observer?.observe(el)
+type TemplateRefElement = Element | ComponentPublicInstance | null
+
+function setWorkRef(el: TemplateRefElement, id: string) {
+  if (!el) {
+    workRefs.delete(id)
+    return
+  }
+
+  const element = el instanceof Element ? el : el.$el
+
+  if (!(element instanceof Element)) return
+
+  workRefs.set(id, element)
+  observer?.observe(element)
 }
 
 onMounted(() => {

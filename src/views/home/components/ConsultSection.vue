@@ -31,14 +31,7 @@
         <p class="consult-scope">Web制作 / UI調整 / 見せ方の整理 / 実装相談</p>
 
         <div class="consult-actions">
-          <!--
-          TODO:
-          Contactページ作成後に有効化
-          <RouterLink class="consult-link" to="/contact">
-            お問い合わせへ
-          </RouterLink>
-          -->
-          <span class="consult-link is-disabled">お問い合わせへ</span>
+          <RouterLink class="consult-link" to="/contact"> お問い合わせへ </RouterLink>
         </div>
       </div>
     </div>
