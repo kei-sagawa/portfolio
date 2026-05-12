@@ -167,13 +167,13 @@ const targets = [
   },
 ]
 
+// {
+//     title: 'Atelier NIINA',
+//     text: '個人作家の作品を静かに見せるためのポートフォリオサイト。',
+//     image: '/images/web-design/atelier-niina.png',
+//     url: '/samples/atelier-niina/index.html',
+//   },
 const works = [
-  {
-    title: 'Atelier NIINA',
-    text: '個人作家の作品を静かに見せるためのポートフォリオサイト。',
-    image: '/images/web-design/atelier-niina.png',
-    url: '/samples/atelier-niina/index.html',
-  },
   {
     title: '土音',
     text: '器と暮らしをテーマにした、小さなお店のランディングページ。',
