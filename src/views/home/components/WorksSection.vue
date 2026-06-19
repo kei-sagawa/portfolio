@@ -29,7 +29,7 @@
         </figure>
 
         <figure class="shot shot-main">
-          <img src="/images/works/komachi-home.jpg" alt="新古茶道具 こまちのトップページ" />
+          <img src="/images/works/komachi-home.jpg" alt="新古茶道具 宮原のトップページ" />
         </figure>
       </RouterLink>
     </div>

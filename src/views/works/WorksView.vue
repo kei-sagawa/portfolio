@@ -102,7 +102,7 @@ const imageMap: Record<string, { image: string; imageAlt: string }> = {
   },
   komachi: {
     image: '/images/works/komachi-home.jpg',
-    imageAlt: '新古茶道具 こまちのトップページ',
+    imageAlt: '新古茶道具 宮原のトップページ',
   },
 }
 
